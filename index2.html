@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Form Clone</title>
+   
+</head>
+<body>
+    <div class="form-container">
+        <h1>Sample Form</h1>
+        <p>Fill out the form below:</p>
+        <form id="google-form">
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <!-- Dropdown -->
+            <div class="form-group">
+                <label for="options">Select an Option</label>
+                <select id="options" name="options" required>
+                    <option value="">--Select--</option>
+                    <option value="Option 1">Option 1</option>
+                    <option value="Option 2">Option 2</option>
+                    <option value="Option 3">Option 3</option>
+                </select>
+            </div>
+            
+            <!-- Checkbox -->
+            <div class="form-group">
+                <label>Choose your preferences:</label>
+                <div>
+                    <input type="checkbox" id="pref1" name="preferences" value="Preference 1">
+                    <label for="pref1">Preference 1</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="pref2" name="preferences" value="Preference 2">
+                    <label for="pref2">Preference 2</label>
+                </div>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+
+        <!-- Display submitted data -->
+        <div id="form-result" class="hidden">
+            <h3>Form Data</h3>
+            <p id="result-content"></p>
+        </div>
+    </div>
+
+    
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color:black;
+    margin: 0;
+    padding: 0;
+}
+.html{
+    background-color:white;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    color: #202124;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 14px;
+    color: #5f6368;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus, button:focus {
+    outline: none;
+    border-color: #4285f4;
+    box-shadow: 0 0 2px #4285f4;
+}
+
+button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3367d6;
+}
+
+.hidden {
+    display: none;
+}
+
+#form-result {
+    margin-top: 30px;
+    background: #e8f0fe;
+    padding: 20px;
+    border-radius: 8px;
+    color: #202124;
+}
+
+    </style>
+    <script>
+        document.getElementById("google-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from refreshing the page
+
+    // Collect form data
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const options = document.getElementById("options").value;
+
+    const preferences = [];
+    document.querySelectorAll("input[name='preferences']:checked").forEach((checkbox) => {
+        preferences.push(checkbox.value);
+    });
+
+    // Display the form data
+    const resultContent = `
+        <strong>Name:</strong> ${name} <br>
+        <strong>Email:</strong> ${email} <br>
+        <strong>Selected Option:</strong> ${options} <br>
+        <strong>Preferences:</strong> ${preferences.join(", ")}
+    `;
+
+    document.getElementById("result-content").innerHTML = resultContent;
+    document.getElementById("form-result").classList.remove("hidden");
+});
+
+    </script>
+   
+    
+</body>
+</html>
